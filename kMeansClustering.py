@@ -1,4 +1,8 @@
-import sys, math, random, csv, types
+import sys
+import math
+import random
+import csv
+import types
 
 
 class KMeans:
@@ -8,6 +12,7 @@ class KMeans:
         self.centroids = self.initial_centroids(self.data, self.k)
         self.clusters = list()
 
+    # read the file
     def parse_vectors(self, filename):
         reader = csv.reader(open(filename, 'r'), delimiter=',')
         vectors = []
@@ -27,6 +32,7 @@ class KMeans:
 
         return vectors, restrictions
 
+    # initial the points
     def initial_centroids(self, data, k):
         # initialize c (initial centroid) to 0
         row_len = len(data[0]['val'])
@@ -62,6 +68,7 @@ class KMeans:
 
         return centroids
 
+    # sort the points to classes
     def cluster(self):
         change = True
 
@@ -87,6 +94,7 @@ class KMeans:
 
         return self.clusters
 
+    # update the centrids of the classes
     def recalc_centroids(self):
         row_len = len(self.data[0]['val'])
         c = [[0 for i in range(row_len)] for j in range(self.k)]
@@ -104,6 +112,7 @@ class KMeans:
         for i, centroid in enumerate(self.centroids):
             self.centroids[i]['val'] = c[i]
 
+    # find the distance between two points
     def distance(self, v1, v2):
         if len(v1) != len(v2):
             print
@@ -117,6 +126,7 @@ class KMeans:
                 total += val
             return math.sqrt(total)
 
+    # find the closest point
     def closest(self, point):
         minDist = sys.maxint
         minCluster = -1
@@ -146,12 +156,9 @@ def main():
     for i, cluster in enumerate(clusters):
         print("Cluster " + str(i + 1) + ":")
         centroid = kmeans.centroids[i]['val']
-        print
-        "Center: ", centroid
-        print
-        "Num Points: ", len(cluster)
-        print
-        "Points: "
+        print("Center: ", centroid)
+        print("Num Points: ", len(cluster))
+        print("Points: ")
         maxdist = 0
         mindist = sys.maxint
         avgdist = 0
@@ -161,8 +168,7 @@ def main():
             else:
                 distance = kmeans.distance(centroid, point)
 
-            print
-            point, ", distance=", distance
+            print(point, ", distance=", distance)
             avgdist += distance
             if distance > maxdist:
                 maxdist = distance
