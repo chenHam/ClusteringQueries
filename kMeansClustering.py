@@ -1,5 +1,8 @@
 import sys, math, random, csv, types
+import  pandas as py
 
+# file = py.read_csv("queries.csv")
+# print(file)
 
 class KMeans:
     def __init__(self, filename, k):
@@ -9,7 +12,9 @@ class KMeans:
         self.clusters = list()
 
     def parse_vectors(self, filename):
-        reader = csv.reader(open(filename, 'r'), delimiter=',')
+       # reader = csv.reader(open(filename, 'r'), delimiter=',')
+        reader = py.read_csv("queries.csv")
+        print(reader)
         vectors = []
         restrictions = []
 
@@ -17,7 +22,8 @@ class KMeans:
             if row_ct > 0:
                 new_row = dict()
                 new_row["cluster"] = 0
-                if int(restrictions[0]) == 0:
+                #if int(restrictions[0]) == 0:
+                if (restrictions[0]).__eq__(0):
                     new_row["key"] = row[0]
                 new_row["val"] = tuple([x for i, x in enumerate(row) if
                                         i < len(restrictions) and int(restrictions[i]) == 1 and len(x.strip()) >= 1])
@@ -134,7 +140,9 @@ def main():
     threshold = 0
 
     if len(sys.argv) > 3 or len(sys.argv) < 2:
-        print("Usage: python kmeans.py <filename> num_clusters")
+       # print("Usage: python" + kmeans.py <filename> 4)
+      #  print(KMeans.__init__(py, 'queries', 4))
+        KMeans('queries.csv', 4)
         return
 
     if len(sys.argv) == 3:
