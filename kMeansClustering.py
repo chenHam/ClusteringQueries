@@ -1,6 +1,8 @@
 import sys
 import math
+import random
 import csv
+import types
 
 
 class KMeans:
@@ -12,7 +14,9 @@ class KMeans:
 
     # read the file
     def parse_vectors(self, filename):
-        reader = csv.reader(open(filename, 'r'), delimiter=',')
+       # reader = csv.reader(open(filename, 'r'), delimiter=',')
+        reader = py.read_csv("queries.csv")
+        print(reader)
         vectors = []
         restrictions = []
 
@@ -20,7 +24,8 @@ class KMeans:
             if row_ct > 0:
                 new_row = dict()
                 new_row["cluster"] = 0
-                if int(restrictions[0]) == 0:
+                #if int(restrictions[0]) == 0:
+                if (restrictions[0]).__eq__(0):
                     new_row["key"] = row[0]
                 new_row["val"] = tuple([x for i, x in enumerate(row) if
                                         i < len(restrictions) and int(restrictions[i]) == 1 and len(x.strip()) >= 1])
