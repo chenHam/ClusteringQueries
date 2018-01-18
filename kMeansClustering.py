@@ -1,8 +1,6 @@
 import sys
 import math
-import random
 import csv
-import types
 
 
 class KMeans:
@@ -128,6 +126,7 @@ class KMeans:
 
     # find the closest point
     def closest(self, point):
+        # TODO : add another maxint
         minDist = sys.maxint
         minCluster = -1
         for ndx, cluster in enumerate(self.centroids):
