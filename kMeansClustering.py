@@ -132,7 +132,8 @@ class KMeans:
     # find the closest point
     def closest(self, point):
         # TODO : add another maxint
-        minDist = sys.maxint
+        # minDist = sys.maxint
+        minDist = sys.maxsize
         minCluster = -1
         for ndx, cluster in enumerate(self.centroids):
             dist = self.distance(cluster['val'], point['val'])
